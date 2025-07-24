@@ -9,9 +9,10 @@ description: Gotify server.
 
 Add the repository to Helm:
 
-~~helm repo add https://lkummer.github.io/Helm-Charts~~
-
-~~helm repo update~~
+```shell
+helm repo add izyakin-helm-charts https://raw.githubusercontent.com/Izyakin/Helm-Charts/main/
+helm repo update
+```
 
 
 ## Deploy the Chart
@@ -20,20 +21,23 @@ Create a `values.yaml` file with values you wish to override.
 
 Install the chart:
 
-~~helm install example homelab/gotify --file values.yaml~~
-
+```shell
+helm install example izyakin-helm-charts/gotify --file values.yaml
+```
 ## Upgrade the Chart
 
 Upgrade the chart:
 
-~~helm upgrade example homelab/gotify --file values.yaml~~
+```shell
+helm upgrade example izyakin-helm-charts/gotify --file values.yaml
+```
 
 ## Delete the Chart
 
 Delete the chart:
 
-```s
-$ helm delete example
+```shell
+helm delete example
 ```
 
 ## Configuration
