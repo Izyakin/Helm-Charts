@@ -1,0 +1,104 @@
+{{- $fullname := include "gotify.fullname" .}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullname }}
+  labels:
+    {{- include "gotify.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "gotify.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "gotify.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if (and .Values.backup.enabled .Values.backup.restore.enabled) }}
+      initContainers:
+        - name: backup-restore
+          image: restic/restic:0.14.0
+          command:
+            - sh
+            - -c
+              # Restore when data directory is empty.
+            - '[ "$(ls -A /data/gotify-data)" ] || restic restore {{ .Values.backup.restore.snapshot }} --target /'
+          env:
+            - name: RESTIC_REPOSITORY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullname }}-backup
+                  key: resticRepository
+            - name: RESTIC_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullname }}-backup
+                  key: resticRepositoryPassword
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullname }}-backup
+                  key: s3AccessKey
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $fullname }}-backup
+                  key: s3SecretKey
+          volumeMounts:
+            - mountPath: /data/gotify-data
+              name: data
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: /etc/gotify/
+            - name: data
+              mountPath: /app/data
+      volumes:
+        - name: config
+          configMap:
+            name: {{ include "gotify.fullname" . }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.volumeClaim.name }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
