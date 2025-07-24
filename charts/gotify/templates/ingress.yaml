@@ -1,20 +1,23 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "gotify.fullname" . -}}
-{{- $svcPort := .Values.service.port -}}
+{{ $fullName := include "gotify.fullname" . -}}
+{{ $svcPort := .Values.service.port -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "gotify.labels" . | nindent 4 }}
+    {{ include "gotify.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+    {{ toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  {{- if .Values.ingress.tls }}
+  {{- with .Values.ingress.ingressClassName }}
+  ingressClassName: {{ . | quote }}
+  {{- end }}
+  {{- if and .Values.ingress.tls.enabled .Values.ingress.tls.secrets }}
   tls:
-    {{- range .Values.ingress.tls }}
+    {{- range .Values.ingress.tls.secrets }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}

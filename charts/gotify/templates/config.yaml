@@ -3,12 +3,12 @@ kind: ConfigMap
 metadata:
   name: {{ include "gotify.fullname" . }}
   labels:
-    {{- include "gotify.labels" . | nindent 4 }}
+    {{ include "gotify.labels" . | nindent 4 }}
 data:
   config.yml: |
     defaultuser:
       name: {{ .Values.configuration.defaultUser.name }}
       pass: {{ .Values.configuration.defaultUser.password }}
     {{- with .Values.configuration.additional }}
-    {{- toYaml . | nindent 4 }}
+    {{ toYaml . | nindent 4 }}
     {{- end }}

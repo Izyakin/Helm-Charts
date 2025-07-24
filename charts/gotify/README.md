@@ -3,14 +3,16 @@ title: gotify
 description: Gotify server.
 ---
 
+### Chart based on https://lkummer.github.io/Helm-Charts/gotify/
+
 ## Prerequisites
 
 Add the repository to Helm:
 
-```s
-$ helm repo add https://lkummer.github.io/Helm-Charts
-$ helm repo update
-```
+~~helm repo add https://lkummer.github.io/Helm-Charts~~
+
+~~helm repo update~~
+
 
 ## Deploy the Chart
 
@@ -18,17 +20,13 @@ Create a `values.yaml` file with values you wish to override.
 
 Install the chart:
 
-```s
-$ helm install example homelab/gotify --file values.yaml
-```
+~~helm install example homelab/gotify --file values.yaml~~
 
 ## Upgrade the Chart
 
 Upgrade the chart:
 
-```s
-$ helm upgrade example homelab/gotify --file values.yaml
-```
+~~helm upgrade example homelab/gotify --file values.yaml~~
 
 ## Delete the Chart
 
@@ -52,6 +50,7 @@ The chart offers the following list of configuration values.
 | `volumeClaim` | PersistentVolumeClaim related options. |
 | `volumeClaim.enabled` | Enable PersistentVolumeClaim resource. |
 | `volumeClaim.name` | Name of the PersistentVolumeClaim resource. |
+| `volumeClaim.storageClassName` | Storage class name for the PersistentVolumeClaim. |
 | `volumeClaim.annotations` | Kubernetes annotations for the PersistentVolumeClaim. |
 | `volumeClaim.resources` | PersistentVolumeClaim resources options. |
 | `volumeClaim.volumeMode` | PersistentVolumeClaim volumeMode option. |
@@ -61,7 +60,10 @@ The chart offers the following list of configuration values.
 | `ingress.enabled` | Enable ingress resource. |
 | `ingress.annotations` | Kubernetes annotations for the ingress. |
 | `ingress.hosts` | Ingress hosts configuration. |
+| `ingress.ingressClassName` | Ingress class name. |
 | `ingress.tls` | Ingress TLS configuration. |
+| `ingress.tls.enabled` | Enable TLS for ingress when true. |
+| `ingress.tls.secretName` | Secret name for TLS certificate. |
 | `nameOverride` | Override the name of the chart. |
 | `fullnameOverride` | Override the full name of the chart. |
 | `imagePullSecrets` | Image pull secrets. |
