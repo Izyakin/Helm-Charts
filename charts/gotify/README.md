@@ -3,7 +3,17 @@ title: gotify
 description: Gotify server.
 ---
 
-### Chart based on https://lkummer.github.io/Helm-Charts/gotify/
+#### Chart based on https://lkummer.github.io/Helm-Charts/gotify/
+
+## What's new?
+
+- v0.3.0
+  - Added support for backup and restore functionality using Restic.
+  - Added support for PersistentVolumeClaim.
+  - Added support for Ingress TLS configuration.
+  - Added support for Gotify configuration options.
+  - Added support for Gotify image tag override.
+  - Added support for Gotify container resource limits and requests.
 
 ## Prerequisites
 
