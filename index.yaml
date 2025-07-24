@@ -3,12 +3,12 @@ entries:
   gotify:
   - apiVersion: v2
     appVersion: 2.3.6
-    created: "2025-07-24T21:11:29.687569+09:00"
+    created: "2025-07-24T21:16:27.062792+09:00"
     description: Gotify server
     digest: 788a2e9ffe89b05815c0d835686d029f42f9098f00aafa22814740f5de8b8bdd
     name: gotify
     type: application
     urls:
-    - https://raw.githubusercontent.com/Izyakin/Helm-Charts/main/docs/docs/gotify-0.3.0.tgz
+    - https://raw.githubusercontent.com/Izyakin/Helm-Charts/main/gotify-0.3.0.tgz
     version: 0.3.0
-generated: "2025-07-24T21:11:29.686692+09:00"
+generated: "2025-07-24T21:16:27.061993+09:00"
