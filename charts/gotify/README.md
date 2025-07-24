@@ -8,12 +8,9 @@ description: Gotify server.
 ## What's new?
 
 - v0.3.0
-  - Added support for backup and restore functionality using Restic.
-  - Added support for PersistentVolumeClaim.
-  - Added support for Ingress TLS configuration.
-  - Added support for Gotify configuration options.
-  - Added support for Gotify image tag override.
-  - Added support for Gotify container resource limits and requests.
+  - Added ingressClassName support
+  - Extracted TLS Secrets into a dedicated section
+  - Added storageClassName support
 
 ## Prerequisites
 
