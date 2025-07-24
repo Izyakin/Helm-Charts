@@ -9,6 +9,6 @@ entries:
     name: gotify
     type: application
     urls:
-    - https://raw.githubusercontent.com/Izyakin/Helm-Charts/main/gotify-0.3.0.tgz
+    - https://raw.githubusercontent.com/Izyakin/Helm-Charts/main/docs/gotify-0.3.0.tgz
     version: 0.3.0
 generated: "2025-07-24T20:30:40.500871+09:00"
