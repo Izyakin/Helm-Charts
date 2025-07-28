@@ -3,17 +3,17 @@ entries:
   gotify:
   - apiVersion: v2
     appVersion: 2.3.6
-    created: "2025-07-28T12:18:13.725203+09:00"
+    created: "2025-07-28T12:52:42.768879+09:00"
     description: Gotify server
-    digest: 46369d51793302ffe97ea7e03af1f1660925cb4d39cec10b6f4d2fcd39c40f4c
+    digest: 5fe8e8b260300d4e754b95df96b3d4457462f7b59e99048826ed37a9d3f4696c
     name: gotify
     type: application
     urls:
-    - https://raw.githubusercontent.com/Izyakin/Helm-Charts/main/charts-repo/gotify-0.4.0.tgz
-    version: 0.4.0
+    - https://raw.githubusercontent.com/Izyakin/Helm-Charts/main/charts-repo/gotify-0.4.1.tgz
+    version: 0.4.1
   - apiVersion: v2
     appVersion: 2.3.6
-    created: "2025-07-28T12:18:13.724848+09:00"
+    created: "2025-07-28T12:52:42.768395+09:00"
     description: Gotify server
     digest: 788a2e9ffe89b05815c0d835686d029f42f9098f00aafa22814740f5de8b8bdd
     name: gotify
@@ -21,4 +21,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/Izyakin/Helm-Charts/main/charts-repo/gotify-0.3.0.tgz
     version: 0.3.0
-generated: "2025-07-28T12:18:13.723993+09:00"
+generated: "2025-07-28T12:52:42.767208+09:00"
