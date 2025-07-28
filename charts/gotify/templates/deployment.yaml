@@ -101,9 +101,6 @@ spec:
             - name: data
               mountPath: /app/data
       volumes:
-        - name: config
-          configMap:
-            name: {{ include "gotify.fullname" . }}
         - name: data
           persistentVolumeClaim:
             claimName: {{ .Values.volumeClaim.name }}

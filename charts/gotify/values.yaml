@@ -49,7 +49,7 @@ ingress:
 
 config:
   # Enable ConfigMap creation. See documentation at https://gotify.net/docs/config#environment-variables
-  enabled: false
+  enabled: true
   data:
     TZ: "Asia/Seoul"    # Key and value for data ConfigMap
     GOTIFY_DATABASE_DIALECT: "postgres" # Database dialect (e.g., postgres, sqlite)
