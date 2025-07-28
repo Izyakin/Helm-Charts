@@ -7,6 +7,11 @@ description: Gotify server.
 
 ## What's new?
 
+- v0.4.0
+  - Added support for environment variables and environment variables from Kubernetes ConfigMap or Secret.
+  - Added secret support.
+  - Refactored configmap support.
+
 - v0.3.0
   - Added ingressClassName support
   - Extracted TLS Secrets into a dedicated section
@@ -53,11 +58,8 @@ The chart offers the following list of configuration values.
 
 | Parameter | Description
 | - | - |
-| `configuration` | Gotify configuration options. |
-| `configuration.defaultUser` | Default Gotify admin user. |
-| `configuration.defaultUser.name` | Default Gotify admin user name. |
-| `configuration.defaultUser.password` | Default Gotify admin user password. |
-| `configuration.additional` | Additional YAML to be appended to the Gotify configuration. |
+| `env` | Environment variables for the Gotify container. |
+| `envFrom` | Environment variables from Kubernetes ConfigMap or Secret. |
 | `volumeClaim` | PersistentVolumeClaim related options. |
 | `volumeClaim.enabled` | Enable PersistentVolumeClaim resource. |
 | `volumeClaim.name` | Name of the PersistentVolumeClaim resource. |

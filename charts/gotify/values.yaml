@@ -47,6 +47,47 @@ ingress:
       hosts:
         - chart-example.local
 
+config:
+  enabled: true              # Enable ConfigMap creation
+  data:
+    APP_ENV: "production"    # Key and value for data ConfigMap
+
+secret:
+  enabled: true              # Enable Secret creation
+  data:
+    DB_PASSWORD: "my-password"  # Key and value (secret) in base64 will be automatically encoded
+    API_KEY: "topsecret"
+  # If you need unencoded values, use stringData (Kubernetes will encode it itself):
+#  stringData: {}
+
+# List of environment variables to be passed to the container
+env:
+  enabled: false         # Enable or disable adding env variables
+  values:
+  - name: ENV_VAR_NAME
+    value: "value"
+  - name: ANOTHER_ENV_VAR
+    value: "anotherValue"
+  - name: SECRET_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: my-secret
+        key: username
+  - name: CONFIG_VALUE
+    valueFrom:
+      configMapKeyRef:
+        name: my-configmap
+        key: some-key
+
+envFrom:
+  enabled: false          # Enable or disable adding envFrom
+  sources:
+    - configMapRef:
+        name: my-configmap-name    # Specify the name of your ConfigMap
+    - secretRef:
+        name: my-secret-name       # Specify the name of your Secret
+
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
@@ -64,15 +105,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-configuration:
-  defaultUser:
-    name: admin
-    password: "1234"
-  # Additional configuration options.
-  # Avoid setting server and default user settings.
-  # additional:
-  #   foo: bar
 
 volumeClaim:
   enabled: true

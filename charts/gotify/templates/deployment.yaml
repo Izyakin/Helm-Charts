@@ -77,7 +77,15 @@ spec:
               path: /health
               port: http
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{ toYaml .Values.resources | nindent 12 }}
+          {{- if and .Values.envFrom.enabled .Values.envFrom.sources }}
+          envFrom:
+            {{ toYaml .Values.envFrom.sources | nindent 12 }}
+          {{- end }}
+          {{- if and .Values.env.enabled .Values.env.values }}
+          env:
+            {{ toYaml .Values.env.values | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - name: config
               mountPath: /etc/gotify/
