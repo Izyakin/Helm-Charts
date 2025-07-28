@@ -96,8 +96,6 @@ spec:
             {{ toYaml .Values.env.values | nindent 12 }}
           {{- end }}
           volumeMounts:
-            - name: config
-              mountPath: /etc/gotify/
             - name: data
               mountPath: /app/data
       volumes:
