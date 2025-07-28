@@ -7,6 +7,10 @@ description: Gotify server.
 
 ## What's new?
 
+- v0.4.1
+  - Refactored templates/deployment.yaml
+  - Fixed values.yaml.
+
 - v0.4.0
   - Added support for environment variables and environment variables from Kubernetes ConfigMap or Secret.
   - Added secret support.
@@ -59,7 +63,6 @@ The chart offers the following list of configuration values.
 | Parameter | Description
 | - | - |
 | `env` | Environment variables for the Gotify container. |
-| `envFrom` | Environment variables from Kubernetes ConfigMap or Secret. |
 | `volumeClaim` | PersistentVolumeClaim related options. |
 | `volumeClaim.enabled` | Enable PersistentVolumeClaim resource. |
 | `volumeClaim.name` | Name of the PersistentVolumeClaim resource. |

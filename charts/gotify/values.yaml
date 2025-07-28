@@ -48,19 +48,23 @@ ingress:
         - chart-example.local
 
 config:
-  enabled: true              # Enable ConfigMap creation
+  # Enable ConfigMap creation. See documentation at https://gotify.net/docs/config#environment-variables
+  enabled: false
   data:
-    APP_ENV: "production"    # Key and value for data ConfigMap
+    TZ: "Asia/Seoul"    # Key and value for data ConfigMap
+    GOTIFY_DATABASE_DIALECT: "postgres" # Database dialect (e.g., postgres, sqlite)
+    GOTIFY_REGISTRATION: "true"  # Disable registration
 
 secret:
-  enabled: true              # Enable Secret creation
+  # Enable Secret creation. See documentation at https://gotify.net/docs/config#environment-variables
+  enabled: false
   data:
-    DB_PASSWORD: "my-password"  # Key and value (secret) in base64 will be automatically encoded
-    API_KEY: "topsecret"
+    GOTIFY_DATABASE_CONNECTION: "host=localhost port=5432 user=gotify dbname=gotifydb password=secret" # Key and value (secret) in base64 will be automatically encoded
   # If you need unencoded values, use stringData (Kubernetes will encode it itself):
 #  stringData: {}
 
-# List of environment variables to be passed to the container
+# List of environment variables to be passed to the container.
+# See documentation at https://gotify.net/docs/config#environment-variables
 env:
   enabled: false         # Enable or disable adding env variables
   values:
@@ -78,15 +82,6 @@ env:
       configMapKeyRef:
         name: my-configmap
         key: some-key
-
-envFrom:
-  enabled: false          # Enable or disable adding envFrom
-  sources:
-    - configMapRef:
-        name: my-configmap-name    # Specify the name of your ConfigMap
-    - secretRef:
-        name: my-secret-name       # Specify the name of your Secret
-
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
